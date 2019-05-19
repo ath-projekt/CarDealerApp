@@ -3,6 +3,7 @@ Car Dealer App - web App MVC (.NET Core 2.2)
 
 
 
-Cz³onkowie
+Czï¿½onkowie
 Piotr Rybka
-Przemys³aw Dziki
+Przemysï¿½aw Dziki
+Kamil Smolik
