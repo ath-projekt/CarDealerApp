@@ -7,29 +7,39 @@ namespace CarDealer.Models
 {
     public class CarRepo : ICarRepo
     {
-        public void AddCar(Car car)
-        {
-            throw new NotImplementedException();
-        }
+        private readonly AppDBContext _appDBContext;
 
-        public void DeleteCar(Car car)
+        public CarRepo(AppDBContext appDBContext)
         {
-            throw new NotImplementedException();
-        }
-
-        public void EditCar(Car car)
-        {
-            throw new NotImplementedException();
+            _appDBContext = appDBContext;
         }
 
         public Car GetCar(int carId)
         {
-            throw new NotImplementedException();
+            return _appDBContext.Cars.FirstOrDefault(s => s.Id == carId);
         }
 
         public IEnumerable<Car> GetCars()
         {
-            throw new NotImplementedException();
+            return _appDBContext.Cars;
+        }
+
+        public void AddCar(Car car)
+        {
+            _appDBContext.Cars.Add(car);
+            _appDBContext.SaveChanges();
+        }
+
+        public void DeleteCar(Car car)
+        {
+            _appDBContext.Cars.Remove(car);
+            _appDBContext.SaveChanges();
+        }
+
+        public void EditCar(Car car)
+        {
+            _appDBContext.Cars.Update(car);
+            _appDBContext.SaveChanges();
         }
     }
 }
