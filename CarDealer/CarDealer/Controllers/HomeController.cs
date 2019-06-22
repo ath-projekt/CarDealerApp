@@ -5,25 +5,47 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CarDealer.Models;
+using CarDealer.ViewModels;
 
 namespace CarDealer.Controllers
 {
     public class HomeController : Controller
     {
+
+        private readonly ICarRepo _carRepo;
+
+        public HomeController(ICarRepo carRepo)
+        {
+            _carRepo = carRepo;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            var cars = _carRepo.GetCars().OrderBy(x => x.Title);
+
+            var homeViewModel = new HomeViewModel()
+            {
+                Title = "Oferty sprzedaży samochodów",
+                Cars = cars.ToList()
+            };
+
+            return View(homeViewModel);
         }
 
-        public IActionResult Privacy()
+        public IActionResult Details(int id)
         {
-            return View();
+            var car = _carRepo.GetCar(id);
+
+            if (car == null)
+            {
+                return NotFound();
+            }
+
+            return View(car);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+
+
+
     }
 }
