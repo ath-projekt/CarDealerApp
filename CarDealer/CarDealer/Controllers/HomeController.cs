@@ -26,7 +26,13 @@ namespace CarDealer.Controllers
             var homeViewModel = new HomeViewModel()
             {
                 Title = "Oferty sprzedaży samochodów",
-                Cars = cars.ToList()
+                //Cars = cars.ToList()
+                Cars = new[]
+                {
+                    new Car { Title="Syrenka", Description="Super fura", Id=1},
+                    new Car { Title="Syrenka", Description="Super fura", Id=2},
+                    new Car { Title="Syrenka", Description="Super fura", Id=3}
+                }.ToList()
             };
 
             return View(homeViewModel);

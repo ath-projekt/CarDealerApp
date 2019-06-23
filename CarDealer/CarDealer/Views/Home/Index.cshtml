@@ -6,17 +6,14 @@
 {
     <div class="col-sm-4 col-lg-4 col-md-4">
         <div class="thumbnail">
-            <img src="@car.PhotoUrl" alt="" />
+            <img src="@car.MiniaturePhotoUrl" alt="" />
+                <h3 class="pull-right">@car.Title</h3>
             <div class="caption">
-                
-                <!--CENA!!!-->
-                
                 <h3>
-                    <a asp-controller="Home" asp-action="Details" asp-route-id="@car.Id">@car.Title</a>
+                    <a asp-controller="Home" asp-action="Szczegoly" asp-route-id="@car.Id">@car.Title </a>
                 </h3>
                 
                 <p>@car.Description</p>
-
             </div>
         </div>
     </div>
