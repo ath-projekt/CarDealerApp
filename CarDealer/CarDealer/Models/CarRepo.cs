@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CarDealer.Database;
 
 namespace CarDealer.Models
 {
     public class CarRepo : ICarRepo
     {
-        private readonly AppDBContext _appDBContext;
+        private readonly DatabaseContext _appDBContext;
 
-        public CarRepo(AppDBContext appDBContext)
+        public CarRepo(DatabaseContex appDBContext)
         {
             _appDBContext = appDBContext;
         }
