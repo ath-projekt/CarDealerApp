@@ -1,8 +1,23 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model CarDealer.ViewModels.HomeViewModel
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h2>@Model.Title</h2>
+
+@foreach (var car in Model.Cars)
+{
+    <div class="col-sm-4 col-lg-4 col-md-4">
+        <div class="thumbnail">
+            <img src="@car.PhotoUrl" alt="" />
+            <div class="caption">
+                
+                <!--CENA!!!-->
+                
+                <h3>
+                    <a asp-controller="Home" asp-action="Details" asp-route-id="@car.Id">@car.Title</a>
+                </h3>
+                
+                <p>@car.Description</p>
+
+            </div>
+        </div>
+    </div>
+}

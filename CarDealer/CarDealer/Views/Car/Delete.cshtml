@@ -1,0 +1,34 @@
+﻿@model Car
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+<div>
+    <div class="thumbnail">
+        <div class="row">
+            <div class="col-md-6">
+
+                <img alt="Photo" src="@Model.PhotoUrl" height="500" width="500" />
+            </div>
+
+            <div class="col-md-6">
+                
+                <h4>@Model.Title</h4>
+                
+                <p>@Model.Description</p>
+                
+                <h2>Czy aby napewno chcesz usunąc?</h2>
+                
+                <div class="pull-right">
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="PhotoUrl" />
+                        <input type="submit" value="Usuń" class="btn btn-success" />
+                        <a asp-action="Index" class="btn btn-success">Powrót</a>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

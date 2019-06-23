@@ -1,0 +1,26 @@
+﻿@model Car
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+<div>
+    <div class="thumbnail">
+        <div class="row">
+            
+            <div class="col-md-6">
+                <img alt="Photo" src="@Model.PhotoUrl" height="500" width="500" />
+            </div>
+
+            <div class="col-md-3">
+                <h4>@Model.Title</h4>
+                <p>@Model.Description</p>
+            </div>
+
+            <div class="col-md-3" style="padding-right:50px">
+                <h3>
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Edycja</a>
+                    <a asp-action="Index" class="btn btn-success">Powrót</a>
+                </h3>
+            </div>
+        </div>
+    </div>>
+</div>
