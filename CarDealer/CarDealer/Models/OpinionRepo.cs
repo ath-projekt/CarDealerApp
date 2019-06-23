@@ -2,22 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CarDealer.Database;
 
 namespace CarDealer.Models
 {
     public class OpinionRepo : IOpinionRepo
     {
-        private readonly AppDBContext _appDBContext;
+        private readonly DatabaseContext _databaseContext;
 
-        public OpinionRepo(AppDBContext appDBContext)
+        public OpinionRepo(DatabaseContext databaseContext)
         {
-            _appDBContext = appDBContext;
+            _databaseContext = databaseContext;
         }
 
         public void AddOpinion(Opinion opinion)
         {
-            _appDBContext.Opinions.Add(opinion);
-            _appDBContext.SaveChanges();
+            _databaseContext.Opinions.Add(opinion);
+            _databaseContext.SaveChanges();
         }
     }
 }

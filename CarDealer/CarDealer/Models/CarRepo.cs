@@ -8,39 +8,39 @@ namespace CarDealer.Models
 {
     public class CarRepo : ICarRepo
     {
-        private readonly DatabaseContext _appDBContext;
+        private readonly DatabaseContext _databaseContext;
 
-        public CarRepo(DatabaseContex appDBContext)
+        public CarRepo(DatabaseContext databaseContext)
         {
-            _appDBContext = appDBContext;
+            _databaseContext = databaseContext;
         }
 
         public Car GetCar(int carId)
         {
-            return _appDBContext.Cars.FirstOrDefault(s => s.Id == carId);
+            return _databaseContext.Cars.FirstOrDefault(s => s.Id == carId);
         }
 
         public IEnumerable<Car> GetCars()
         {
-            return _appDBContext.Cars;
+            return _databaseContext.Cars;
         }
 
         public void AddCar(Car car)
         {
-            _appDBContext.Cars.Add(car);
-            _appDBContext.SaveChanges();
+            _databaseContext.Cars.Add(car);
+            _databaseContext.SaveChanges();
         }
 
         public void DeleteCar(Car car)
         {
-            _appDBContext.Cars.Remove(car);
-            _appDBContext.SaveChanges();
+            _databaseContext.Cars.Remove(car);
+            _databaseContext.SaveChanges();
         }
 
         public void EditCar(Car car)
         {
-            _appDBContext.Cars.Update(car);
-            _appDBContext.SaveChanges();
+            _databaseContext.Cars.Update(car);
+            _databaseContext.SaveChanges();
         }
     }
 }
