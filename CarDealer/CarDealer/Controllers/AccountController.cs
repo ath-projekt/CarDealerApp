@@ -41,6 +41,8 @@ namespace CarDealer.Controllers
                 {
                     return RedirectToAction("Index", "Home");
                 }
+
+                return RedirectToAction("Index", "Home");
             }
 
             ModelState.AddModelError("", "Nazwa użytkownika/hasło nie są właściwe");

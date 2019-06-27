@@ -8,11 +8,11 @@ namespace CarDealer.ViewModels
 {
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Przed zalogowaniem podaj nazwę użytkownika!")]
         [Display(Name = "Nazwa użytkownika")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Przed zalogowaniem podaj hasło!")]
         [Display(Name = "Hasło")]
         [DataType(DataType.Password)]
         public string Password { get; set; }

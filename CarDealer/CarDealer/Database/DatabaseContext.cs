@@ -7,6 +7,7 @@ namespace CarDealer.Database
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options): base(options)
         {
+            DBInitializer.Seed(this);
         }
 
 

@@ -1,17 +1,28 @@
 ﻿@model CarDealer.Models.Car
 
-<h2>@Model.Title</h2>
+<div class="container">
+    <div class="jumbotron">
+        <h2>@Model.Title</h2>
+    </div>
+</div>
 
-<div class="thumbnail">
 
-    <img alt="@Model.Title" src="@Model.PhotoUrl" />
+<div class="row">
 
-    <div class="caption-full">
+    <div class="col-sm-6">
+        <img class="thumbnail HoverDiv" alt="@Model.Title" style="width:100%" src="@Model.PhotoUrl" />
+    </div>
 
-        <!--CENA!!!-->
+    <div class="col-sm-6">
+        
+        <div class="caption-full">
 
-        <p>@Model.Description</p>
+            <!--CENA!!!-->
 
+            <p>@Model.Description</p>
+
+        </div>
     </div>
 
 </div>
+

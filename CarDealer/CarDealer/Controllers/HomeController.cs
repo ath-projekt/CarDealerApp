@@ -14,25 +14,20 @@ namespace CarDealer.Controllers
 
         private readonly ICarRepo _carRepo;
 
+
         public HomeController(ICarRepo carRepo)
         {
-            _carRepo = carRepo;
+            _carRepo = carRepo;            
         }
 
         public IActionResult Index()
         {
-            var cars = _carRepo.GetCars().OrderBy(x => x.Title);
+            var cars = _carRepo.GetCars().OrderBy(x => x.Title).ToList();
 
             var homeViewModel = new HomeViewModel()
             {
                 Title = "Oferty sprzedaży samochodów",
-                //Cars = cars.ToList()
-                Cars = new[]
-                {
-                    new Car { Title="Syrenka", Description="Super fura", Id=1},
-                    new Car { Title="Syrenka", Description="Super fura", Id=2},
-                    new Car { Title="Syrenka", Description="Super fura", Id=3}
-                }.ToList()
+                Cars = cars
             };
 
             return View(homeViewModel);

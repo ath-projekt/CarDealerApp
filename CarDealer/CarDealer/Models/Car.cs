@@ -12,5 +12,8 @@ namespace CarDealer.Models
         public string Description { get; set; }
         public string PhotoUrl { get; set; }
         public string MiniaturePhotoUrl { get; set; }
+
+
+
     }
 }

@@ -42,6 +42,8 @@ namespace CarDealer
 
             services.AddScoped<ICarRepo, CarRepo>();
             services.AddScoped<IOpinionRepo, OpinionRepo>();
+            services.AddScoped<IdentityUser>();
+            services.AddScoped<UserManager<IdentityUser>>();
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

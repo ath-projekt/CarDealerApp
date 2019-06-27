@@ -1,20 +1,51 @@
 ﻿@model CarDealer.ViewModels.HomeViewModel
 
-<h2>@Model.Title</h2>
-
-@foreach (var car in Model.Cars)
-{
-    <div class="col-sm-4 col-lg-4 col-md-4">
-        <div class="thumbnail">
-            <img src="@car.MiniaturePhotoUrl" alt="" />
-                <h3 class="pull-right">@car.Title</h3>
-            <div class="caption">
-                <h3>
-                    <a asp-controller="Home" asp-action="Szczegoly" asp-route-id="@car.Id">@car.Title </a>
-                </h3>
-                
-                <p>@car.Description</p>
-            </div>
-        </div>
+<div class="container" style="text-align:center;align-content:center">
+    <div class="jumbotron" >
+        <h2>@Model.Title</h2>
     </div>
-}
+</div>
+
+
+
+
+<div class="container">
+
+    <div class="row" style="text-align:center">
+
+        @foreach (var car in Model.Cars)
+        {
+
+            <div class="col-*-*">
+
+                <div class="container" style="padding:4px 4px 4px 4px">
+
+                    <div class="card card-width" style="height:420px">
+
+                        <a asp-controller="Home" asp-action="Details" asp-route-id="@car.Id">
+                            <img class="card-img-top thumbnail-width thumbnail-height" src="@car.MiniaturePhotoUrl" alt="Car photo">
+                        </a>
+
+                        <div class="card-body">
+
+                            <h4 class="card-title">@car.Title</h4>
+
+                            <p class="card-text">@car.Description.Substring(0, 100)...</p>
+
+                            <a asp-controller="Home" asp-action="Details" asp-route-id="@car.Id" class="btn btn-primary">Szczegóły</a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        }
+
+
+    </div>
+
+</div>
+
