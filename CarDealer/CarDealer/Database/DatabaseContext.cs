@@ -13,5 +13,7 @@ namespace CarDealer.Database
 
         public DbSet<Car> Cars { get; set; }
         public DbSet<Opinion> Opinions { get; set; }
+        public DbSet<User> Users { get; set; }
+
     }
 }

@@ -38,6 +38,20 @@ namespace CarDealer.Migrations
                 {
                     table.PrimaryKey("PK_Opinions", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    UserName = table.Column<string>(nullable: true),
+                    Password = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -47,6 +61,9 @@ namespace CarDealer.Migrations
 
             migrationBuilder.DropTable(
                 name: "Opinions");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }
