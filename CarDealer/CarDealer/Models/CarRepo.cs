@@ -22,8 +22,8 @@ namespace CarDealer.Models
 
         public IEnumerable<Car> GetCars()
         {
-            var temo = _databaseContext.Cars.OrderBy(x=>x.Title).ToList();
-            return temo;
+            var temp = _databaseContext.Cars.OrderBy(x=>x.Title).ToList();
+            return temp;
         }
 
         public void AddCar(Car car)

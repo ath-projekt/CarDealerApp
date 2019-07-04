@@ -1,53 +1,80 @@
 ﻿@model Car
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
+<div class="container-fluid">
+    <div class="row">
 
-<h2>Dodaj samochod</h2>
+        <!--tytuł-->
+        <div class="col-sm-12">
+            <h2>Dodaj samochod</h2>
+            <hr />
+        </div>
 
-<hr />
-<div class="row">
-    
-    <div class="col-md-4">
-        
-        <form method="post" enctype="multipart/form-data" asp-action="uploadFile">
-            <div class="form-group">
-                <input type="hidden" asp-for="Id" />
-                <label class="control-label">Zdjęcie samochodu</label><br />
-                <img src="@ViewBag.ImgPath" height="300" width="300" /><br />
-                <input type="file" name="file" style="margin-top:10px" />
-            </div>
-            
-            <div class="form-group">
-                <input type="submit" value="Załaduj zdjęcie" class="btn btn-primary" />
-            </div>
-        </form>
+        <!--zdjęcie-->
+        <div class="col-sm-6">
+            <form method="post" enctype="multipart/form-data" asp-action="uploadFile">
+                                
+                <!--załaduj zdjęcie-->
+                <div class="form-group">
+                    <div class="form-group">
+                        <!--zdjęcie-->
+                        <input type="hidden" asp-for="Id" />
+                        <label class="control-label">Zdjęcie samochodu</label><br />
+                        <img alt="CarPhoto" src="@ViewBag.ImgPath" height="500" width="500" />
+                    </div>
+
+                    <div class="form-group">
+                        <!--załaduj zdjęcie-->
+                        <label for="exampleFormControlFile1">Załaduj zdjęcie</label>
+                        <input type="file" name="file" class="form-control-file">
+                    </div>
+                </div>
+
+            </form>
+
+
+
+        </div>
+
+        <!--tytuł i opis-->
+        <div class="col-sm-6">
+
+            <!--tytuł, opis, -->
+            <!--dodaj samochód, powrot-->
+
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <!--tytuł-->
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label">Tytuł ogłoszenia</label>
+                    <input asp-for="Title" class="form-control" placeholder="Wpisz tytuł"/>
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <!--opis-->
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <textarea asp-for="Description" class="form-control" rows="10" placeholder="Wpisz opis"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <input type="hidden" asp-for="PhotoUrl" value="@ViewBag.ImgPath" />
+                <input type="hidden" asp-for="MiniaturePhotoUrl" value="@ViewBag.ImgPath" />
+
+
+
+                <div class="form-group">
+                    <input type="submit" value="Dodaj samochód" class="btn btn-success" style="margin-top:30px" />
+                    <a asp-action="Index" class="btn btn-danger pull-right" style="margin-top:30px">Powrót</a>
+                </div>
+
+
+            </form>
+
+        </div>
+
 
     </div>
-
-    <form asp-action="Create">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <input type="hidden" asp-for="PhotoUrl" value="@ViewBag.ImgPath" />
-            <input type="hidden" asp-for="MiniaturePhotoUrl" value="@ViewBag.ImgPath" />
-            
-            
-
-            <div class="form-group">
-                <input type="submit" value="Dodaj samochód" class="btn btn-success" style="margin-top:30px" />
-                <a asp-action="Index" class="btn btn-danger pull-right" style="margin-top:30px">Powrót</a>
-            </div>
-        </div>
-    </form>
 </div>
+

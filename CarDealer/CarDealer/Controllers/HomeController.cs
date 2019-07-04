@@ -22,7 +22,10 @@ namespace CarDealer.Controllers
 
         public IActionResult Index()
         {
-            var cars = _carRepo.GetCars().OrderBy(x => x.Title).ToList();
+            var cars = _carRepo
+                .GetCars()
+                .Where(x => x != null && x.Description != null && x.Id != null && x.MiniaturePhotoUrl != null && x.PhotoUrl != null && x.Title != null)
+                .ToList();
 
             var homeViewModel = new HomeViewModel()
             {

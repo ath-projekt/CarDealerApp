@@ -1,18 +1,91 @@
 ﻿@model Car
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers 
 
-<h2>Edytuj samochód</h2>
+<div class="container-fluid">
+    <div class="row">
 
-<hr />
+        <!--tytuł-->
+        <div class="col-sm-12">
+            <h2>Edytuj samochód</h2>
+            <hr />
+        </div>
 
-<div class="row">
+        <!--zdjęcie-->
+        <div class="col-sm-6">
+            <form method="post" enctype="multipart/form-data" asp-action="uploadFile">
+
+                <!--załaduj zdjęcie-->
+                <div class="form-group">
+                    <div class="form-group">
+                        <!--zdjęcie-->
+                        <input type="hidden" asp-for="Id" />
+                        <label class="control-label">Zdjęcie samochodu</label><br />
+                        <img alt="CarPhoto" src="@Model.MiniaturePhotoUrl" height="500" width="500" />
+                    </div>
+
+                    <div class="form-group">
+                        <!--załaduj zdjęcie-->
+                        <label for="exampleFormControlFile1">Załaduj zdjęcie</label>
+                        <input type="file" name="file" class="form-control-file">
+                    </div>
+                </div>
+
+            </form>
+
+
+
+        </div>
+
+        <!--tytuł i opis-->
+        <div class="col-sm-6">
+
+            <!--tytuł, opis, -->
+            <!--dodaj samochód, powrot-->
+
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <!--tytuł-->
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label">Tytuł ogłoszenia</label>
+                    <input asp-for="Title" class="form-control" placeholder="@Model.Title" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <!--opis-->
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <textarea asp-for="Description" class="form-control" rows="10" placeholder="@Model.Description"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <input type="hidden" asp-for="PhotoUrl" value="@Model.PhotoUrl" />
+                <input type="hidden" asp-for="MiniaturePhotoUrl" value="@Model.MiniaturePhotoUrl" />
+
+
+
+                <div class="form-group">
+                    <input type="submit" value="Dodaj samochód" class="btn btn-success" style="margin-top:30px" />
+                    <a asp-action="Index" class="btn btn-danger pull-right" style="margin-top:30px">Powrót</a>
+                </div>
+
+
+            </form>
+
+        </div>
+
+
+    </div>
+</div>
+
+@*<div class="row">
     
     <div class="col-md-4">
         <form method="post" enctype="multipart/form-data" asp-action="uploadFile">
             <div class="form-group">
                 <input type="hidden" asp-for="Id" />
                 <label class="control-label">Zdjęcie samochodu</label><br />
-                <img src="@ViewBag.ImgPath" height="300" width="300" /><br />
+                <img src="@Model.MiniaturePhotoUrl" height="300" width="300" /><br />
                 <input type="file" name="file" style="margin-top:10px" />
             </div>
             <div class="form-group">
@@ -26,8 +99,8 @@
         
         <div class="col-md-4">            
             
-            <input type="hidden" asp-for="PhotoUrl" value="@ViewBag.ImgPath" />
-            <input type="hidden" asp-for="MiniaturePhotoUrl" value="@ViewBag.ImgPath" />                       
+            <input type="hidden" asp-for="PhotoUrl" value="@Model.PhotoUrl" />
+            <input type="hidden" asp-for="MiniaturePhotoUrl" value="@Model.MiniaturePhotoUrl" />                       
             
             <div class="form-group">
                 <input type="submit" value="Edytuj samochód" class="btn btn-success" style="margin-top:30px" />
@@ -35,4 +108,4 @@
             </div>
         </div>
     </form>
-</div>
+</div>*@
