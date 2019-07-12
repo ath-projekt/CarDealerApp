@@ -1,37 +1,37 @@
 ﻿@model Opinion
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<form asp-action="Index" method="post" class="form-horizontal" role="form">
+<form asp-action="Index" method="post" class="form-horizontal col-md-12" role="form">
 
     <div asp-validation-summary="All" class="text-danger" ></div>
 
     <div class="form-group">
-        <label asp-for="UserName" class="col-md-2 control-label" ></label>
+        <label asp-for="UserName" class="col-md-2 control-label" >Imię i nazwisko</label>
         <div class="col-md-5">
-            <input asp-for="UserName" class="mate-control" />
+            <input asp-for="UserName" class="mate-control col-md-10" />
             <span asp-validation-for="UserName" class="text-danger"></span>
         </div>
     </div>
 
     <div class="form-group">
-        <label asp-for="Email" class="col-md-2 control-label"></label>
+        <label asp-for="Email" class="col-md-2 control-label">E-mail</label>
         <div class="col-md-5">
-            <input asp-for="Email" class="form-control" />
+            <input asp-for="Email" class="form-control col-md-10"  />
             <span asp-validation-for="Email" class="text-danger" />
         </div>
     </div>
 
     <div class="form-group">
-        <label asp-for="Message" class="col-md-2 control-label"></label>
+        <label asp-for="Message" class="col-md-2 control-label">Wiadomość</label>
         <div class="col-md-5">
-            <textarea asp-for="Message" class="form-control"> </textarea>
+            <textarea asp-for="Message" spellcheck="true" rows="10" class="form-control col-md-10" placeholder="Wpisz swoją wiadomość" ></textarea>
             <span asp-validation-for="Message" class="text-danger" ></span>
         </div>
     </div>
 
     <div class="form-group">
-        <label asp-for="RequireAnswer" class="col-md-2 control-label"></label>
-        <div class="col-md-5">
+        <label asp-for="RequireAnswer" class="col-md-2 control-label">Proszę o odpowiedź</label>
+        <div class="col-md-1">
             <input type="checkbox" asp-for="RequireAnswer" class="form-control" />
         </div>
     </div>
