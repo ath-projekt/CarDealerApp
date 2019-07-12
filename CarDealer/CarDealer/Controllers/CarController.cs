@@ -8,45 +8,48 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace CarDealer.Controllers
 {
     public class CarController : Controller
     {
         private readonly ICarRepo _carRepo;
-        private IHostingEnvironment _hostingEnvironment;
+        private IHostingEnvironment _env;
 
-        public CarController(ICarRepo carRepo, IHostingEnvironment hostingEnvironment)
+
+
+        public CarController(ICarRepo carRepo, IHostingEnvironment env)
         {
             _carRepo = carRepo;
-            _hostingEnvironment = hostingEnvironment;
+            _env = env;
         }
 
+
+        // GET: /<controller>/
         public IActionResult Index()
         {
-            var cars = _carRepo.GetCars();
+            var samochody = _carRepo.GetCars();
 
-            return View(cars);
+            return View(samochody);
         }
 
         public IActionResult Details(int id)
         {
-            var car = _carRepo.GetCar(id);
+            var samochod = _carRepo.GetCar(id);
 
-            if (car == null)
-            {
+            if (samochod == null)
                 return NotFound();
-            }
 
-            return View(car);
+            return View(samochod);
         }
 
-        public IActionResult Create(string photoUrl)
-        {
-            if (!string.IsNullOrEmpty(photoUrl))
-            {
-                ViewBag.ImagePath = "/Images/" + photoUrl;
-            }
 
+        public IActionResult Create(string FileName)
+        {
+            if (!string.IsNullOrEmpty(FileName))
+            {
+                ViewBag.ImgPath = "/Images/" + FileName;
+            }
             return View();
         }
 
@@ -57,29 +60,26 @@ namespace CarDealer.Controllers
             if (ModelState.IsValid)
             {
                 _carRepo.AddCar(car);
-
                 return RedirectToAction("Index");
             }
-
             return View(car);
         }
 
-        public IActionResult Edit(int id, string photoUrl)
+
+        public IActionResult Edit(int Id, string FileName)
         {
-            var car = _carRepo.GetCar(id);
+            var car = _carRepo.GetCar(Id);
 
             if (car == null)
-            {
                 return NotFound();
-            }
 
-            if (!string.IsNullOrEmpty(photoUrl))
+            if (!string.IsNullOrEmpty(FileName))
             {
-                ViewBag.ImagePath = "/Images/" + photoUrl;
+                ViewBag.ImgPath = "/Images/" + FileName;
             }
             else
             {
-                ViewBag.ImagePath = car.PhotoUrl;
+                ViewBag.ImgPath = car.PhotoUrl;
             }
 
             return View(car);
@@ -87,46 +87,40 @@ namespace CarDealer.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Car car, [FromQuery(Name = "PhotoUrl")] string PhotoUrl)
+        public IActionResult Edit(Car car)
         {
-            //Tu nie działa!!!
-
-            //car.PhotoUrl = PhotoUrl;
-            //car.MiniaturePhotoUrl = PhotoUrl;
-
             if (ModelState.IsValid)
             {
                 _carRepo.EditCar(car);
-
                 return RedirectToAction("Index");
             }
-
             return View(car);
         }
 
-        public IActionResult Delete(int id)
+
+        public IActionResult Delete(int Id)
         {
-            var car = _carRepo.GetCar(id);
+            var car = _carRepo.GetCar(Id);
 
             if (car == null)
-            {
                 return NotFound();
-            }
 
             return View(car);
         }
+
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id, string photoUrl)
         {
             var car = _carRepo.GetCar(id);
-
             _carRepo.DeleteCar(car);
+
+            //usuwaniue pliku
 
             if (photoUrl != null)
             {
-                var webRoot = _hostingEnvironment.WebRootPath;
+                var webRoot = _env.WebRootPath;
                 var filePath = Path.Combine(webRoot.ToString() + photoUrl);
                 System.IO.File.Delete(filePath);
             }
@@ -134,11 +128,10 @@ namespace CarDealer.Controllers
             return RedirectToAction("Index");
         }
 
-
         [HttpPost("uploadFile")]
         public async Task<IActionResult> uploadFile(IFormCollection form)
         {
-            var webRoot = _hostingEnvironment.WebRootPath;
+            var webRoot = _env.WebRootPath;
             var filePath = Path.Combine(webRoot.ToString() + "\\images\\" + form.Files[0].FileName);
 
             if (form.Files[0].FileName.Length > 0)
@@ -152,18 +145,13 @@ namespace CarDealer.Controllers
             if (Convert.ToString(form["Id"]) == string.Empty || Convert.ToString(form["Id"]) == "0")
                 return RedirectToAction(nameof(Create), new { FileName = Convert.ToString(form.Files[0].FileName) });
 
-            var obj = new
+            return RedirectToAction(nameof(Edit), new
             {
-                PhotoUrl = Convert.ToString(form.Files[0].FileName),
-                Id = Convert.ToString(form["Id"])
-            };
-            return RedirectToAction(nameof(Edit), obj);
+                FileName = Convert.ToString(form.Files[0].FileName),
+                id = Convert.ToString(form["Id"])
+            });
 
         }
-
-
-
-
 
     }
 }
