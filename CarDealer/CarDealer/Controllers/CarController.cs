@@ -87,8 +87,11 @@ namespace CarDealer.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Car car)
+        public IActionResult Edit(Car car, [FromQuery(Name = "PhotoUrl")] string PhotoUrl)
         {
+            car.PhotoUrl = PhotoUrl;
+            car.MiniaturePhotoUrl = PhotoUrl;
+
             if (ModelState.IsValid)
             {
                 _carRepo.EditCar(car);
@@ -129,11 +132,12 @@ namespace CarDealer.Controllers
             return RedirectToAction("Index");
         }
 
+
         [HttpPost("uploadFile")]
-        public async Task<IActionResult> UploadFile(IFormCollection form)
+        public async Task<IActionResult> uploadFile(IFormCollection form)
         {
             var webRoot = _hostingEnvironment.WebRootPath;
-            var filePath = Path.Combine(webRoot.ToString() + @"\images\" + form.Files[0].FileName);
+            var filePath = Path.Combine(webRoot.ToString() + "\\images\\" + form.Files[0].FileName);
 
             if (form.Files[0].FileName.Length > 0)
             {
@@ -144,14 +148,19 @@ namespace CarDealer.Controllers
             }
 
             if (Convert.ToString(form["Id"]) == string.Empty || Convert.ToString(form["Id"]) == "0")
-            {
                 return RedirectToAction(nameof(Create), new { FileName = Convert.ToString(form.Files[0].FileName) });
-            }
 
-            return RedirectToAction(nameof(Create), new { FileName = Convert.ToString(form.Files[0].FileName) });
+            var obj = new
+            {
+                PhotoUrl = Convert.ToString(form.Files[0].FileName),
+                Id = Convert.ToString(form["Id"])
+            };
+            return RedirectToAction(nameof(Edit), obj);
 
         }
-        
+
+
+
 
 
     }

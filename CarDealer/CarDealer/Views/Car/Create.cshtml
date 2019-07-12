@@ -6,7 +6,7 @@
 
         <!--tytuł-->
         <div class="col-sm-12">
-            <h2>Dodaj samochod</h2>
+            <h2>Dodaj samochód</h2>
             <hr />
         </div>
 
@@ -20,7 +20,7 @@
                         <!--zdjęcie-->
                         <input type="hidden" asp-for="Id" />
                         <label class="control-label">Zdjęcie samochodu</label><br />
-                        <img alt="CarPhoto" src="@ViewBag.ImgPath" height="500" width="500" />
+                        <img alt="CarPhoto" src="@ViewBag.ImgPath" height="400" width="500" />
                     </div>
 
                     <div class="form-group">
@@ -48,14 +48,14 @@
                 <!--tytuł-->
                 <div class="form-group">
                     <label asp-for="Title" class="control-label">Tytuł ogłoszenia</label>
-                    <input asp-for="Title" class="form-control" placeholder="Wpisz tytuł"/>
+                    <input asp-for="Title" class="form-control" placeholder="Wpisz tytuł ogłoszenia"/>
                     <span asp-validation-for="Title" class="text-danger"></span>
                 </div>
 
                 <!--opis-->
                 <div class="form-group">
                     <label asp-for="Description" class="control-label"></label>
-                    <textarea asp-for="Description" class="form-control" rows="10" placeholder="Wpisz opis"></textarea>
+                    <textarea asp-for="Description" class="form-control" rows="10" placeholder="Opisz samochód"></textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
 

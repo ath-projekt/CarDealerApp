@@ -24,7 +24,7 @@
 
             <div class="form-group">
                 <label asp-for="Password">Hasło:</label>
-                <input type="password" class="form-control" id="pwd" placeholder="Wpisz hasło" name="pswd" required>
+                <input asp-for="Password" type="password" class="form-control" id="pwd" placeholder="Wpisz hasło" required>
                 <div asp-validation-for="Password" class="valid-feedback">OK.</div>
                 <div asp-validation-for="Password" class="invalid-feedback">Niepoprawne hasło.</div>
             </div>

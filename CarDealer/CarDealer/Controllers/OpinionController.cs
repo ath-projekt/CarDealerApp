@@ -35,8 +35,6 @@ namespace CarDealer.Controllers
             }
 
             return View(opinion);
-
-
         }
 
         public IActionResult OpinionSent(Opinion opinion)

@@ -40,11 +40,10 @@ namespace CarDealer
 
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<DatabaseContext>();
 
-            services.AddScoped<ICarRepo, CarRepo>();
-            services.AddScoped<IOpinionRepo, OpinionRepo>();
-            services.AddScoped<IdentityUser>();
-            services.AddScoped<UserManager<IdentityUser>>();
-
+            services.AddTransient<ICarRepo, CarRepo>();
+            services.AddTransient<IOpinionRepo, OpinionRepo>();
+            //services.AddScoped<IdentityUser>();
+            //services.AddScoped<UserManager<IdentityUser>>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -55,6 +54,14 @@ namespace CarDealer
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseStatusCodePages();
+                app.UseStaticFiles();
+                app.UseAuthentication();
+
+                app.UseMvc(routes =>
+                {
+                    routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{Id?}");
+                });
             }
             else
             {
@@ -63,9 +70,9 @@ namespace CarDealer
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseCookiePolicy();
+            //app.UseHttpsRedirection();
+            //app.UseStaticFiles();
+            //app.UseCookiePolicy();
 
             app.UseMvc(routes =>
             {
