@@ -89,8 +89,10 @@ namespace CarDealer.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Car car, [FromQuery(Name = "PhotoUrl")] string PhotoUrl)
         {
-            car.PhotoUrl = PhotoUrl;
-            car.MiniaturePhotoUrl = PhotoUrl;
+            //Tu nie działa!!!
+
+            //car.PhotoUrl = PhotoUrl;
+            //car.MiniaturePhotoUrl = PhotoUrl;
 
             if (ModelState.IsValid)
             {
