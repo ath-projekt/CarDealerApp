@@ -36,28 +36,49 @@
             </div>
 
             <!--PODSTRONY: HOME, OPINIE-->
-            <ul class="nav navbar-nav">
-                <li class="active"><a asp-controller="Home" asp-action="Index">Home</a></li>
-                <li><a asp-controller="Opinion" asp-action="Index">Opinie</a></li>
-            </ul>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <ul class="nav navbar-nav">
+                    <li class="active"><a asp-controller="Car" asp-action="Index">Home</a></li>
+                    <li><a asp-controller="Opinion" asp-action="Index">Opinie</a></li>
+                </ul>                
+            }
+            else
+            {
+                <ul class="nav navbar-nav">
+                    <li class="active"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-controller="Opinion" asp-action="Index">Opinie</a></li>
+                </ul>
+            }
+                       
+            
 
             <!--ZALOGUJ, ZAREJESTRUJ / WYLOGUJ-->
             @if (SignInManager.IsSignedIn(User))
             {
                 <form asp-area="" asp-controller="Account" asp-action="Logout" id="logoutForm" method="post" class="navbar-right">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="javascript:document.getElementById('logoutForm').submit()">
-                                <span class="glyphicon glyphicon-log-out"></span> Wyloguj</a></li>
+                        <li>
+                            <a href="javascript:document.getElementById('logoutForm').submit()">
+                                <span class="glyphicon glyphicon-log-out"></span> Wyloguj
+                            </a>
+                        </li>
                     </ul>
                 </form>
             }
             else
             {
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a id="registerLink" asp-controller="Account" asp-action="Register">
-                        <span class="glyphicon glyphicon-user"></span> Rejestracja</a></li>
-                    <li><a id="loginLink" asp-controller="Account" asp-action="Login">
-                        <span class="glyphicon glyphicon-log-in"></span> Logowanie</a></li>
+                    <li>
+                        <a id="registerLink" asp-controller="Account" asp-action="Register">
+                            <span class="glyphicon glyphicon-user"></span> Rejestracja
+                        </a>
+                    </li>
+                    <li>
+                        <a id="loginLink" asp-controller="Account" asp-action="Login">
+                            <span class="glyphicon glyphicon-log-in"></span> Logowanie
+                        </a>
+                    </li>
                 </ul>
 
             }
