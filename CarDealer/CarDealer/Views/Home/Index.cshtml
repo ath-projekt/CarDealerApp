@@ -30,7 +30,15 @@
 
                             <h4 class="card-title">@car.Title</h4>
 
-                            <p class="card-text">@car.Description.Substring(0, 100)...</p>
+                            <p class="card-text">
+                            @if (@car.Description.Length > 100)
+                            {
+                                @string.Concat(@car.Description.ToString().Substring(0, 100) + "...");
+                            }
+                            else
+                            {
+                                @car.Description;
+                            }</p>
 
                             <a asp-controller="Home" asp-action="Details" asp-route-id="@car.Id" class="btn btn-primary">Szczegóły</a>
 

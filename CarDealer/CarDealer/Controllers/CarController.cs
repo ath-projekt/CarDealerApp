@@ -57,6 +57,11 @@ namespace CarDealer.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Car car)
         {
+            if (car.Id == 0)
+            {
+                car.Id = _carRepo.GetNewCarId();
+            }
+
             if (ModelState.IsValid)
             {
                 _carRepo.AddCar(car);

@@ -43,5 +43,10 @@ namespace CarDealer.Models
             _databaseContext.Cars.Update(car);
             _databaseContext.SaveChanges();
         }
+
+        public int GetNewCarId()
+        {
+            return _databaseContext.Cars.Max(x => x.Id) + 1;
+        }
     }
 }

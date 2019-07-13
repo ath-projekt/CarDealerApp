@@ -13,6 +13,6 @@ namespace CarDealer.Models
         void AddCar(Car car);
         void EditCar(Car car);
         void DeleteCar(Car car);
-
+        int GetNewCarId();
     }
 }
