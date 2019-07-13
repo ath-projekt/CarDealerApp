@@ -8,5 +8,6 @@ namespace CarDealer.Models
     public interface IOpinionRepo
     {
         void AddOpinion(Opinion opinion);
+        int GetNewOpinionId();
     }
 }

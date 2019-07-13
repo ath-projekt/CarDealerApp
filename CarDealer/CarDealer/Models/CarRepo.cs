@@ -46,7 +46,15 @@ namespace CarDealer.Models
 
         public int GetNewCarId()
         {
-            return _databaseContext.Cars.Max(x => x.Id) + 1;
+            if (_databaseContext.Cars.Any())
+            {
+                return _databaseContext.Cars.Max(x => x.Id) + 1;
+            }
+            else
+            {
+                return 1;
+            }
+            
         }
     }
 }

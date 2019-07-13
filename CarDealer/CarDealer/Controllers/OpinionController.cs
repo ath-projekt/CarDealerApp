@@ -30,6 +30,11 @@ namespace CarDealer.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (opinion.Id == 0)
+                {
+                    opinion.Id = _opinionRepo.GetNewOpinionId();
+                }
+
                 _opinionRepo.AddOpinion(opinion);
                 return RedirectToAction("OpinionSent");
             }

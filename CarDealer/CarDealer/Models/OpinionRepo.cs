@@ -20,5 +20,18 @@ namespace CarDealer.Models
             _databaseContext.Opinions.Add(opinion);
             _databaseContext.SaveChanges();
         }
+
+        public int GetNewOpinionId()
+        {
+            if (_databaseContext.Opinions.Any())
+            {
+                return _databaseContext.Opinions.Select(x => x.Id).Max() + 1;
+            }
+            else
+            {
+                return 1;
+            }
+            
+        }
     }
 }
